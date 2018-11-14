@@ -4,7 +4,14 @@ module.exports = (app) => {
 
     app.get('/', (req, res) => {
         //This route will render the landing page
-        res.render('index')
+        Post.find({}).then(post => {
+            res.render('index', {
+                post
+            });
+        }).catch(err => {
+            console.log(err.message)
+        })
+
     })
 
     app.get('/posts/new', (req, res) => {
