@@ -53,15 +53,15 @@
   <% for(post1 of post) {
     %>
     <li class="list-group-item">
-    <div class="lead"><%=post1.title%></div>
-    <a href="<%=this.url%>" target="_blank"><%=post1.url%><a>
-    <li><%= post1.title%></li>
+    <a href="/posts/<%=post1._id%>" class="lead"><%=post1.title%></a>
+    <a href="<%=post1.url%>" target="_blank"><%=post1.url%><a>
+    
   </li>
   
     <%
   } %>
-  
 </ul>
+
     
   </div>
 </div>

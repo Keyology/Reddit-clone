@@ -40,4 +40,6 @@ require('./data/reddit-db')
 
 
 app.listen(port, () => console.log(`listening on port ${port}`))
-module.exports = app
+module.exports = app;
+
+// <div class="lead"><%=post1.title%></div>
