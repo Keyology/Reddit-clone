@@ -47,4 +47,20 @@ module.exports = (app) => {
                 console.log(err.message)
             });
     });
+
+    app.get('/f/:subreddit', (req, res) => {
+        Post.find({
+                subreddit: req.params.subreddit
+            })
+            .then(post => {
+                res.render('posts-index.ejs', {
+                    post
+                });
+            }).catch(err => {
+                console.log(err);
+            });
+    });
+
+
+
 }
