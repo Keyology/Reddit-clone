@@ -20,7 +20,26 @@ const PostSchema = new Schema({
     summary: {
         type: String,
         required: true
-    }
+    },
+
+    subreddit: {
+        type: String,
+        required: true,
+        // save as an array of mini subreddits
+    },
+
+    subreddit: [{
+        type: String,
+        require: true
+    }, {
+        type: String
+    }, {
+        type: String
+    }, {
+        type: String
+    }, {
+        type: String
+    }]
 });
 
 PostSchema.pre('save', next => {
