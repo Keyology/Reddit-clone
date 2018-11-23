@@ -1,0 +1,35 @@
+<h1>Reddit.js</h1>
+
+<p>Welcome to Reddit! ^__^</p>
+
+<div class="row">
+    <div class="col-sm-8 col-sm-offset-2">
+        <ul>
+
+        <% for(post1 of post) {
+    %>
+
+    <ul>
+    <li class="list-group-item">
+                <div class="lead">
+                    <a href="/posts/<%=post1._id%>" class="lead"><%=post1.title%></a>
+                </div>
+                <a href="<%=post1.url%>" target="_blank"><%=post1.url%></a>
+                <div class="text-right">
+                    <a href="/f/<%=post1.url%>"><%=post1.url%></a>
+                </div>
+            </li>
+
+
+    </ul>
+    
+    
+  
+    <%
+  } %>
+            
+
+
+
+
+           
