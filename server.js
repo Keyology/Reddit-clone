@@ -23,6 +23,11 @@ app.use(bodyParser.json())
 //imports post routes 
 require('./controllers/posts.js')(app);
 
+//import comments
+
+require('./controllers/comments-controller.js')(app);
+
+
 // set the view engine
 
 app.set('view engine', 'ejs');
