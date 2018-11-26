@@ -9,7 +9,7 @@ module.exports = (app) => {
             .save()
             .then((comment) => {
                 console.log('This is the id sent in the params ' + req.params.postId)
-                Post.findById(ObjectId(req.params.postId))
+                return Post.findById(ObjectId(req.params.postId))
             })
             .then((post) => {
                 console.log('This is the found post ' + post)
@@ -18,6 +18,7 @@ module.exports = (app) => {
                 return post.save() // Save the post with the newly added comments
             })
             .then((post) => {
+                //console.log("this is comments:", comments)
                 res.redirect('/')
             })
             .catch((err) => {

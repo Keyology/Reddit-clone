@@ -22,11 +22,6 @@ const PostSchema = new Schema({
         required: true
     },
 
-    subreddit: {
-        type: String,
-        required: true,
-        // save as an array of mini subreddits
-    },
 
     subreddit: [{
         type: String,
@@ -39,6 +34,10 @@ const PostSchema = new Schema({
         type: String
     }, {
         type: String
+    }],
+    comments: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Comment'
     }]
 });
 

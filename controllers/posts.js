@@ -40,6 +40,7 @@ module.exports = (app) => {
             .then(user => {
                 user.posts.unshift(post);
                 user.save();
+                console.log("This is printing user post:", user.post)
                 // REDIRECT TO THE NEW POST
                 res.redirect("/posts/" + post._id);
             })
