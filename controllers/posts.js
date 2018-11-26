@@ -2,16 +2,22 @@ const Post = require('../models/post');
 
 module.exports = (app) => {
 
-    app.get('/', (req, res) => {
-        //This route will render the landing page
-        Post.find({}).then(post => {
-            res.render('index', {
-                post
-            })
-        }).catch(err => {
-            console.log(err.message)
-        })
+    app.get("/", (req, res) => {
+        const currentUser = req.user;
+        console.log("This is currentUser inside query:", currentUser)
 
+        Post.find({})
+            .then(post => {
+                console.log("This is currentUser outside query:", currentUser)
+
+                res.render("index", {
+                    post,
+                    currentUser
+                });
+            })
+            .catch(err => {
+                console.log(err.message);
+            });
     })
 
     app.get('/posts/new', (req, res) => {
@@ -23,23 +29,31 @@ module.exports = (app) => {
 
 
     app.post('/posts/new', (req, res) => {
-        //This route will create a new post and save it to the database
-        // INSTANTIATE INSTANCE OF POST MODEL
         const post = new Post(req.body);
+        post.author = req.user._id;
 
-        // SAVE INSTANCE OF POST MODEL TO DB
-        //For some reason post will not save to database
-        post.save((err, post) => {
-            // REDIRECT TO THE ROOT
-            return res.redirect(`/`);
-        })
+
+        post.save()
+            .then(post => {
+                return User.findById(req.user._id);
+            })
+            .then(user => {
+                user.posts.unshift(post);
+                user.save();
+                // REDIRECT TO THE NEW POST
+                res.redirect("/posts/" + post._id);
+            })
+            .catch(err => {
+                console.log(err.message);
+            });
+
     });
 
 
     app.get('/posts/:id', (req, res) => {
         Post.findById(req.params.id)
             .then(post => {
-                res.render('post-show.ejs', {
+                res.render('post-show', {
                     post
                 });
             })
