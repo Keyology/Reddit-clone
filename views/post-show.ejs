@@ -19,7 +19,18 @@
   <div class="text-right">
     <button type="submit">Save</button>
   </div>
+  <% for(post1 of post.comments) {
+    %>
+    <p><%=post1.content%></p>
+  
+  
+    <%
+  } %>
+
 </form>
+
+
+
 
 
 
