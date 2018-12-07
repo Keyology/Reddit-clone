@@ -3,8 +3,11 @@ const User = require('../models/user.js')
 
 module.exports = (app) => {
 
+
     app.get("/", (req, res) => {
         const currentUser = req.user;
+
+
         console.log("This is currentUser inside query:", currentUser)
 
         Post.find({})
@@ -22,14 +25,18 @@ module.exports = (app) => {
     })
 
     app.get('/posts/new', (req, res) => {
+        const currentUser = req.user;
         //this route will render the the new post page
-        res.render('post-new')
+        res.render('post-new', {
+            currentUser
+        })
 
     })
 
 
 
     app.post('/posts/new', (req, res) => {
+        const currentUser = req.user;
         var post = new Post(req.body);
         post.author = req.user._id;
 
@@ -85,12 +92,14 @@ module.exports = (app) => {
     });
 
     app.get('/f/:subreddit', (req, res) => {
+        const currentUser = req.user;
         Post.find({
                 subreddit: req.params.subreddit
             })
             .then(post => {
                 res.render('posts-index.ejs', {
-                    post
+                    post,
+                    currentUser
                 });
             }).catch(err => {
                 console.log(err);

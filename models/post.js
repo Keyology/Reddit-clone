@@ -15,7 +15,7 @@ const PostSchema = new Schema({
     },
     url: {
         type: String,
-        required: true
+        required: false
     },
     summary: {
         type: String,
@@ -35,16 +35,18 @@ const PostSchema = new Schema({
     }, {
         type: String
     }],
+
+
+
+    author: {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+        require: true
+    },
     comments: [{
         type: Schema.Types.ObjectId,
         ref: 'Comment'
     }],
-
-    author: {
-        type: Schema.Types.ObjectId,
-        ref: "User",
-        required: true
-    }
 });
 
 PostSchema.pre('save', next => {

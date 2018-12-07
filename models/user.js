@@ -18,15 +18,14 @@ const UserSchema = new Schema({
         required: true
     },
 
+    posts: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Post'
+    }],
     comments: [{
         type: Schema.Types.ObjectId,
         ref: 'Comment'
-    }],
-    posts: [{
-        type: Schema.Types.ObjectId,
-        ref: "Post"
     }]
-
 
 
 });
