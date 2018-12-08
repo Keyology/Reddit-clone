@@ -16,6 +16,7 @@
   </div>
 <form action="/posts/<%=post._id%>/comments" method="post">
   <input type="hidden" name="postId" value="<%=post._id%>">
+  <input type="hidden" name="content" value="<%=post.content%>">
   <textarea class='form-control' name="content" placeholder="Comment"></textarea>
   <div class="text-right">
     <button type="submit">Save</button>
@@ -23,6 +24,7 @@
   <% for(post1 of post.comments) {
     %>
     <p><%=post1.content%></p>
+    <p><%=currentUser.username%></p>
   
   
     <%

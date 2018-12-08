@@ -12,6 +12,8 @@ module.exports = (app) => {
 
         Post.find({})
             .then(post => {
+                const currentUser = req.user;
+
                 console.log("This is currentUser outside query:", currentUser)
 
                 res.render("index", {
@@ -58,7 +60,7 @@ module.exports = (app) => {
 
 
     app.get('/posts/:id', (req, res) => {
-        const currentUser = req.user;
+
         //Find the post
         Post.findById(req.params.id).populate('author').populate({
             path: 'comments',
@@ -82,9 +84,12 @@ module.exports = (app) => {
                 }
             }
         }).then(post => {
+            const currentUser = req.user;
+            console.log(req.user)
             res.render('post-show', {
                 post,
                 currentUser
+
             })
         }).catch(err => {
             console.log(err.message);
